@@ -114,6 +114,39 @@ public class CustomLinkedList<T extends Comparable<T>> implements CustomList<T> 
 		this.length = source.length;
 	}
 	
+	public Node insertBefore(Node index, T object) {
+		if (this.head != index) {
+			this.current = new Node(index.previous, object, index);
+		} else {
+			this.current = new Node(object, index);
+		}
+		if (this.head != index) {
+			index.previous.next = this.current;
+		} else {
+			this.head = this.current;
+		}
+		index.previous = this.current;
+		this.length++;
+		
+		return this.current;
+	}
+	
+	public Node insertAfter(Node index, T object) {
+		if (this.tail != index) {
+			this.current = new Node(index, object, index.next);
+		} else {
+			this.current = new Node(index, object);
+		}
+		if (this.tail != index) {
+			index.next.previous = this.current;
+		} else {
+			this.tail = this.current;
+		}
+		index.next = this.current;
+		this.length++;
+				
+		return this.current;
+	}
 	
 	public Node appendToHead(T object) {
 		if (this.head != null) {
@@ -134,13 +167,37 @@ public class CustomLinkedList<T extends Comparable<T>> implements CustomList<T> 
 		return this.current;
 	}
 	
+	public Node appendToTail(T object) {
+		if (this.tail != null) {
+			this.current = new Node(this.tail, object);
+		} else {
+			this.current = new Node(object);
+		}
+		if (this.tail != null) {
+			this.tail.next = this.current;
+		} else {
+			this.head = this.current;
+		}
+		this.tail = this.current;
+		this.length++;
+		
+		return this.current;
+	}
+	
+	
+	
 	
 	public static void main(String args[]) {
 		CustomLinkedList<Integer> test1 = new CustomLinkedList<Integer>();
+		
+		CustomLinkedList.Node temp;
 		test1.appendToHead(5);
-		test1.appendToHead(4);
+		test1.appendToTail(7);
+		temp = test1.appendToHead(4);
 		test1.appendToHead(3);
 		test1.appendToHead(2);
+		test1.insertAfter(temp, 8);
+		test1.insertBefore(temp, 2);
 		
 //		CustomLinkedList.Node index = null;
 //		CustomLinkedList.Node nextIndex = test1.head;
