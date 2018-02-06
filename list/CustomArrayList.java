@@ -24,16 +24,22 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 		this.capacity = _capacity;
 		this.length = 0;
 	}
-	public CustomArrayList(final CustomArrayList<T> source) {
-		//System.out.println("Copy Constructor");
-		this.front = source.front;
-		int i = 0;
-		while (i < source.length) {
-			this.front[i] = source.front[i];
-			i++;
-		}
-		this.capacity = source.capacity;
+	//copy constructor, but don't need to make like this in java. It's c++ style. Second one below.
+//	public CustomArrayList(final CustomArrayList<T> source) {
+//		//System.out.println("Copy Constructor");
+//		this.front = source.front;
+//		int i = 0;
+//		while (i < source.length) {
+//			this.front[i] = source.front[i];
+//			i++;
+//		}
+//		this.capacity = source.capacity;
+//		this.length = source.length;
+//	}
+	public CustomArrayList(CustomArrayList<T> source) {
+		this.front = (T[]) source.front;
 		this.length = source.length;
+		this.capacity = source.capacity;
 	}
 	protected void finalize() {
 		System.out.println("Finalize");
@@ -426,7 +432,7 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test1 " + i + " >> " + test1.getFrom(i));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================1");
 		Integer[] indexes = new Integer[test1.length];
 		Integer[] count = new Integer[1];
 		test1.linearSearchMultiple(101, indexes, count);
@@ -435,13 +441,13 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test1 " + indexes[i] + " >> " + test1.getFrom(indexes[i]));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================22");
 		
 		test1.deleteEnd();
 		test1.deleteFirst();
 		int index = test1.linearSearchUnique(101);
 		System.out.println(test1.getFrom(index));
-		System.out.println("===========================================");
+		System.out.println("===========================================333");
 		test1.delete(index);
 		
 		CustomArrayList<Integer> test2 = new CustomArrayList<Integer>(test1);
@@ -454,7 +460,7 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test1 " + i + " >> " + test1.getFrom(i));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================4444");
 		test1.clear();
 		test1.appendToFirst(2248);
 		test1.appendToEnd(35931);
@@ -468,13 +474,13 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test1 " + i + " >> " + test1.getFrom(i));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================55555");
 		i = 0;
 		while (i < test2.length) {
 			System.out.println("test2 " + i + " >> " + test2.getFrom(i));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================666666");
 		
 		CustomArrayList<Integer> test3 = new CustomArrayList<Integer>();
 		test3.mergeSort(test2, test1);
@@ -483,11 +489,11 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test3 " + i + " >> " + test3.getFrom(i));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================7777777");
 		
 		index = test3.binarySearchUnique(4999);
 		System.out.println(test3.getFrom(index));
-		System.out.println("===========================================");
+		System.out.println("===========================================88888888");
 		test3.modify(6, 201);
 		test3.modify(7, 201);
 		
@@ -499,6 +505,6 @@ public class CustomArrayList<T extends Comparable<T>> implements CustomList<T> {
 			System.out.println("test3 " + indexes2[i] + " >> " + test3.getFrom(indexes2[i]));
 			i++;
 		}
-		System.out.println("===========================================");
+		System.out.println("===========================================9999999999");
 	}
 }
